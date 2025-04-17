@@ -1,0 +1,537 @@
+\documentclass[11pt,preprint]{elsarticle}
+
+\usepackage{lmodern}
+%%%% My spacing
+\usepackage{setspace}
+\setstretch{1.2}
+\DeclareMathSizes{12}{14}{10}{10}
+
+% Wrap around which gives all figures included the [H] command, or places it "here". This can be tedious to code in Rmarkdown.
+\usepackage{float}
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+    \expandafter\origfigure\expandafter[H]
+} {
+    \endorigfigure
+}
+
+\let\origtable\table
+\let\endorigtable\endtable
+\renewenvironment{table}[1][2] {
+    \expandafter\origtable\expandafter[H]
+} {
+    \endorigtable
+}
+
+
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+
+\usepackage{amssymb, amsmath, amsthm, amsfonts}
+
+\def\bibsection{\section*{References}} %%% Make "References" appear before bibliography
+
+
+\usepackage[numbers]{natbib}
+
+\usepackage{longtable}
+\usepackage[margin=2.3cm,bottom=2cm,top=2.5cm, includefoot]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bottom, hang, flushmargin]{footmisc}
+\usepackage{graphicx}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1.3ex plus 0.5ex minus 0.3ex}
+\usepackage{textcomp}
+\renewcommand{\headrulewidth}{0.2pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\arraybackslash\hspace{0pt}}p{#1}}
+
+%%%%  Remove the "preprint submitted to" part. Don't worry about this either, it just looks better without it:
+\makeatletter
+\def\ps@pprintTitle{%
+  \let\@oddhead\@empty
+  \let\@evenhead\@empty
+  \let\@oddfoot\@empty
+  \let\@evenfoot\@oddfoot
+}
+\makeatother
+
+ \def\tightlist{} % This allows for subbullets!
+
+\usepackage{hyperref}
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=blue,
+            pdfborder={0 0 0}}
+
+
+% The following packages allow huxtable to work:
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{calc}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{caption}
+
+
+\newenvironment{columns}[1][]{}{}
+
+\newenvironment{column}[1]{\begin{minipage}{#1}\ignorespaces}{%
+\end{minipage}
+\ifhmode\unskip\fi
+\aftergroup\useignorespacesandallpars}
+
+\def\useignorespacesandallpars#1\ignorespaces\fi{%
+#1\fi\ignorespacesandallpars}
+
+\makeatletter
+\def\ignorespacesandallpars{%
+  \@ifnextchar\par
+    {\expandafter\ignorespacesandallpars\@gobble}%
+    {}%
+}
+\makeatother
+
+
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+\href{\#cite.\detokenize{#1}}{#2}\nocite{#1}}
+
+\makeatletter
+% allow citations to break across lines
+\let\@cite@ofmt\@firstofone
+% avoid brackets around text for \cite:
+\def\@biblabel#1{}
+\def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+{\begin{list}{}{%
+	\setlength{\itemindent}{0pt}
+	\setlength{\leftmargin}{0pt}
+	\setlength{\parsep}{0pt}
+	% turn on hanging indent if param 1 is 1
+	\ifodd #1
+	\setlength{\leftmargin}{\cslhangindent}
+	\setlength{\itemindent}{-1\cslhangindent}
+	\fi
+	% set entry spacing
+	\setlength{\itemsep}{#2\baselineskip}}}
+{\end{list}}
+
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+
+\urlstyle{same}  % don't use monospace font for urls
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setcounter{secnumdepth}{5}
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+
+%%% Include extra packages specified by user
+
+%%% Hard setting column skips for reports - this ensures greater consistency and control over the length settings in the document.
+%% page layout
+%% paragraphs
+\setlength{\baselineskip}{12pt plus 0pt minus 0pt}
+\setlength{\parskip}{12pt plus 0pt minus 0pt}
+\setlength{\parindent}{0pt plus 0pt minus 0pt}
+%% floats
+\setlength{\floatsep}{12pt plus 0 pt minus 0pt}
+\setlength{\textfloatsep}{20pt plus 0pt minus 0pt}
+\setlength{\intextsep}{14pt plus 0pt minus 0pt}
+\setlength{\dbltextfloatsep}{20pt plus 0pt minus 0pt}
+\setlength{\dblfloatsep}{14pt plus 0pt minus 0pt}
+%% maths
+\setlength{\abovedisplayskip}{12pt plus 0pt minus 0pt}
+\setlength{\belowdisplayskip}{12pt plus 0pt minus 0pt}
+%% lists
+\setlength{\topsep}{10pt plus 0pt minus 0pt}
+\setlength{\partopsep}{3pt plus 0pt minus 0pt}
+\setlength{\itemsep}{5pt plus 0pt minus 0pt}
+\setlength{\labelsep}{8mm plus 0mm minus 0mm}
+\setlength{\parsep}{\the\parskip}
+\setlength{\listparindent}{\the\parindent}
+%% verbatim
+\setlength{\fboxsep}{5pt plus 0pt minus 0pt}
+
+
+
+\begin{document}
+
+
+
+\begin{frontmatter}  %
+
+\title{Thesis Proposal: Machine Learning and Volatility Models}
+
+% Set to FALSE if wanting to remove title (for submission)
+
+
+
+
+\author[Add1]{Liam Andrew Beattie}
+\ead{22562435@sun.ac.za}
+
+
+
+
+
+\address[Add1]{Stellenbosch University, South Africa}
+
+
+
+\vspace{1cm}
+
+
+
+
+
+\vspace{0.5cm}
+
+\end{frontmatter}
+
+\setcounter{footnote}{0}
+
+
+
+%________________________
+% Header and Footers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\chead{}
+\rhead{}
+\lfoot{}
+\rfoot{\footnotesize Page \thepage}
+\lhead{}
+%\rfoot{\footnotesize Page \thepage } % "e.g. Page 2"
+\cfoot{}
+
+%\setlength\headheight{30pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%________________________
+
+\headsep 35pt % So that header does not go over title
+
+
+
+
+\section{\texorpdfstring{Introduction
+\label{Introduction}}{Introduction }}\label{introduction}
+
+Here are the papers I intend to read and give a brief summary of them:
+
+Gunnarsson, Isern, Kaloudis, Risstad, Vigdel \& Westgaard
+(\citeproc{ref-GUNNARSSON2024103221}{2024: 33}) Horvath, Muguruza \&
+Tomas (\citeproc{ref-Horvath2021DeepVol}{2021}) Petrozziello, Troiano,
+Serra, Jordanov, Storti, Tagliaferri \& Rocca
+(\citeproc{ref-Petrozziello2022DeepVol}{2022}) Wu, Cheng, Jankovic \&
+Kolanovic (\citeproc{ref-Wu2024InvestableAI}{2024}) Wu, Jankovic, Kaplan
+\& Lee (\citeproc{ref-Wu2025CrossAssetVol}{2025}) Zeng \& Klabjan
+(\citeproc{ref-ZENG2019376}{2019}) Zhang, Zhang, Cucuringu \& Qian
+(\citeproc{ref-Zhang2023VolForecastML}{2023})
+
+Zhang \emph{et al.} (\citeproc{ref-Zhang2023VolForecastML}{2023})
+
+\section*{Data}\label{data}
+\addcontentsline{toc}{section}{Data}
+
+To write a comprehensive, focused quantitative econometric paper on
+machine learning and volatility models with less emphasis on an
+extensive literature review, you should prioritize a \textbf{clearly
+defined and narrow research question} and a \textbf{rigorous
+quantitative analysis} directly addressing that question. Here's how you
+can structure your paper, drawing on the provided sources:
+
+\textbf{I. Introduction and Focused Research Question:}
+
+\begin{itemize}
+\tightlist
+\item
+  Start with a concise introduction that immediately highlights the
+  specific gap you are addressing in the literature or a particular
+  problem you are investigating.
+\item
+  \textbf{Clearly state your focused research question(s)}. For
+  instance, instead of broadly investigating if ML can forecast
+  volatility better than traditional models, you might focus on:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The performance of a specific novel ML architecture (e.g., an
+    attention-based deep learning model) in forecasting the implied
+    volatility of a particular asset class (e.g., S\&P 500 options)
+    compared to a specific benchmark (e.g., a specific GARCH extension
+    or HAR model).
+  \item
+    The impact of a specific type of high-frequency intraday data (e.g.,
+    order book data, transaction volume) as features in an ML model for
+    short-term realized volatility forecasting for a specific set of
+    stocks.
+  \item
+    The effectiveness of a particular XAI technique (e.g., SHAP values)
+    in interpreting the predictions of a specific ML model applied to
+    implied volatility surface modeling.
+  \item
+    The economic value (e.g., through backtesting trading strategies) of
+    volatility forecasts from a specific ML model compared to a standard
+    econometric model for a defined set of assets.
+  \end{itemize}
+\item
+  Briefly mention the contribution of your focused study to the existing
+  literature without an exhaustive review at this stage. You can refer
+  to recent reviews to justify the relevance of your specific angle.
+\item
+  Outline the structure of your paper.
+\end{itemize}
+
+\textbf{II. Data:}
+
+\begin{itemize}
+\tightlist
+\item
+  Provide a detailed description of the specific dataset(s) you will
+  use.
+\item
+  Clearly define your volatility measure (e.g., realized volatility
+  calculated from high-frequency returns, implied volatility from option
+  prices, or volatility indices like VIX).
+\item
+  Specify the asset class(es), time period, and sampling frequency. If
+  using high-frequency data, explain the cleaning and aggregation
+  methods.
+\item
+  Describe the predictor variables you will use, justifying their
+  selection based on previous findings (cite specific papers from the
+  existing literature concisely) or theoretical arguments. If using
+  exogenous data, clearly state its source and frequency.
+\end{itemize}
+
+\textbf{III. Methodology:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Clearly and concisely present the econometric and machine
+  learning models} you will employ. Focus on the mathematical
+  specification of the models.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    For ML models, describe the architecture, activation functions,
+    optimization algorithm (e.g., Adam), and hyperparameter tuning
+    process (e.g., cross-validation).
+  \item
+    For benchmark econometric models (e.g., GARCH, HAR), provide their
+    standard formulations.
+  \end{itemize}
+\item
+  Explain your chosen training scheme (e.g., single asset, pooling data)
+  and out-of-sample testing procedure (e.g., rolling window).
+\item
+  If applicable, describe any feature engineering techniques or data
+  transformations you will use.
+\item
+  If your focus includes explainability, detail the XAI methods you will
+  apply.
+\item
+  If you are investigating computational aspects, describe the hardware
+  or software used (e.g., FPGA technology).
+\end{itemize}
+
+\textbf{IV. Evaluation Metrics:}
+
+\begin{itemize}
+\tightlist
+\item
+  Specify the \textbf{quantitative evaluation metrics} you will use to
+  compare the forecasting performance of your models. These could
+  include statistical measures like Mean Squared Error (MSE), Root Mean
+  Squared Error (RMSE), Mean Absolute Percentage Error (MAPE),
+  Quasi-Likelihood (QLIKE), and statistical tests for predictive
+  accuracy like the Diebold-Mariano (DM) test.
+\item
+  If your research question involves economic significance, clearly
+  outline how you will evaluate the models from an economic point of
+  view (e.g., through backtesting trading strategies, Value-at-Risk
+  (VaR) analysis).
+\end{itemize}
+
+\textbf{V. Empirical Results and Discussion:}
+
+\begin{itemize}
+\tightlist
+\item
+  Present your quantitative results in a clear and organized manner
+  using tables and figures.
+\item
+  \textbf{Focus your discussion directly on answering your stated
+  research question(s)} based on the empirical evidence.
+\item
+  Compare the performance of your chosen ML model(s) against the
+  benchmark econometric model(s) using the selected evaluation metrics.
+\item
+  Analyze the statistical significance of any performance differences
+  (e.g., using DM tests).
+\item
+  Discuss the implications of your findings in the context of the
+  specific niche you are investigating. Briefly connect your results to
+  the broader literature, highlighting how your focused study
+  contributes or contrasts with existing findings. You can be more
+  selective in the literature you discuss here, focusing on the most
+  directly relevant studies.
+\item
+  If applicable, interpret the results of your XAI analysis, explaining
+  which features are most important for your ML model's predictions.
+\item
+  If you conducted an economic evaluation, discuss the practical
+  implications of your findings.
+\end{itemize}
+
+\textbf{VI. Conclusion and Future Work:}
+
+\begin{itemize}
+\tightlist
+\item
+  Summarize your main quantitative findings and directly address your
+  research question(s).
+\item
+  Briefly reiterate the contribution of your focused study.
+\item
+  Suggest specific avenues for future research that build directly on
+  your findings and the limitations of your study.
+\end{itemize}
+
+\textbf{Strategies for Reducing Literature Review:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Target a Very Specific Gap:} Instead of reviewing the entire
+  landscape of ML in volatility, focus on a very narrow sub-topic where
+  the existing literature is limited or where a specific technique has
+  not been thoroughly explored (e.g., the application of a particular
+  deep learning architecture to a niche market). The literature review
+  can then be more concentrated on the immediate context of your
+  research question.
+\item
+  \textbf{Build Upon a Recent Survey:} Since comprehensive literature
+  reviews exist, you can briefly summarize the state of the art based on
+  these reviews and then immediately narrow down to the specific issue
+  your paper addresses.
+\item
+  \textbf{Focus on Methodological Innovation or Application:} If your
+  paper introduces a novel ML technique or applies an existing one to a
+  new and underexplored area of volatility modeling, the literature
+  review can be more focused on the methodological background and the
+  specific context of your application, rather than a broad overview of
+  all volatility models or all ML techniques.
+\item
+  \textbf{Assume Familiarity with Standard Models:} For well-established
+  econometric models (like GARCH) and common ML algorithms (like basic
+  neural networks), you can often provide a brief description and cite
+  seminal works without an extensive historical review.
+\end{itemize}
+
+By adopting a focused research question and prioritizing a rigorous
+quantitative analysis, you can write a comprehensive and valuable
+econometric paper on machine learning and volatility models with a less
+extensive literature review. The key is to be precise in your question,
+thorough in your methodology and evaluation, and direct in your
+discussion of the results in relation to your specific focus.
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{1}
+\bibitem[\citeproctext]{ref-GUNNARSSON2024103221}
+Gunnarsson, E.S., Isern, H.R., Kaloudis, A., Risstad, M., Vigdel, B. \&
+Westgaard, S. 2024.
+\href{https://doi.org/10.1016/j.irfa.2024.103221}{Prediction of realized
+volatility and implied volatility indices using AI and machine learning:
+A review}. \emph{International Review of Financial Analysis}. 93:103221.
+
+\bibitem[\citeproctext]{ref-Horvath2021DeepVol}
+Horvath, B., Muguruza, A. \& Tomas, M. 2021.
+\href{https://doi.org/10.1080/14697688.2020.1817974}{{Deep learning
+volatility: a deep neural network perspective on pricing and calibration
+in (rough) volatility models}}. \emph{Quantitative Finance}.
+21(1):11--27.
+
+\bibitem[\citeproctext]{ref-Petrozziello2022DeepVol}
+Petrozziello, A., Troiano, L., Serra, A., Jordanov, I., Storti, G.,
+Tagliaferri, R. \& Rocca, M.L. 2022.
+\href{https://doi.org/10.1007/s00500-022-07161-1}{Deep learning for
+volatility forecasting in asset management}. \emph{Soft Computing}.
+26(17):8553--8574.
+
+\bibitem[\citeproctext]{ref-Wu2024InvestableAI}
+Wu, E., Cheng, P., Jankovic, L. \& Kolanovic, M. 2024. \emph{Investable
+AI for volatility trading deep learning model for cross asset volatility
+strategies}. (Research Report). J.P. Morgan Global Quantitative \&
+Derivatives Strategy. {[}Online{]}, Available:
+\href{https://httpswww.jpmorganmarkets.com}{httpswww.jpmorganmarkets.com}.
+
+\bibitem[\citeproctext]{ref-Wu2025CrossAssetVol}
+Wu, E., Jankovic, L., Kaplan, B. \& Lee, T.S. 2025. \emph{Cross asset
+volatility: Machine learning based trade recommendations}. (Research
+Report). J.P. Morgan Global Markets Strategy. {[}Online{]}, Available:
+\url{https://www.jpmorganmarkets.com}.
+
+\bibitem[\citeproctext]{ref-ZENG2019376}
+Zeng, Y. \& Klabjan, D. 2019.
+\href{https://doi.org/10.1016/j.knosys.2018.08.039}{Online adaptive
+machine learning based algorithm for implied volatility surface
+modeling}. \emph{Knowledge-Based Systems}. 163:376--391.
+
+\bibitem[\citeproctext]{ref-Zhang2023VolForecastML}
+Zhang, C., Zhang, Y., Cucuringu, M. \& Qian, Z. 2023.
+\href{https://doi.org/10.1093/jjfinec/nbad005}{Volatility forecasting
+with machine learning and intraday commonality}. \emph{Journal of
+Financial Econometrics}. 22(2):492--530.
+
+\end{CSLReferences}
+
+\bibliography{Tex/ref}
+
+
+
+
+
+\end{document}

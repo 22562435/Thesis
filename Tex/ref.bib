@@ -1,28 +1,115 @@
-@article{fama1997,
-  title={Industry costs of equity},
-  author={Fama, Eugene F and French, Kenneth R},
-  journal={Journal of financial economics},
-  volume={43},
-  number={2},
-  pages={153--193},
-  year={1997},
-  publisher={Elsevier}
+
+
+@article{ZENG2019376,
+title = {Online adaptive machine learning based algorithm for implied volatility surface modeling},
+journal = {Knowledge-Based Systems},
+volume = {163},
+pages = {376-391},
+year = {2019},
+issn = {0950-7051},
+doi = {https://doi.org/10.1016/j.knosys.2018.08.039},
+url = {https://www.sciencedirect.com/science/article/pii/S0950705118304350},
+author = {Yaxiong Zeng and Diego Klabjan},
+keywords = {Machine learning, Support vector regression, Online adaptive learning, Stochastic gradient descent, Kernel methods, Option pricing, Implied volatility surface, FPGA application},
+abstract = {In this work, we design a machine learning based method – online adaptive primal support vector regression (SVR) – to model the implied volatility surface (IVS). The algorithm proposed is the first derivation and implementation of an online primal kernel SVR. It features enhancements that allow efficient online adaptive learning by embedding the idea of local fitness and budget maintenance to dynamically update support vectors upon pattern drifts. For algorithm acceleration, we implement its most computationally intensive parts in a Field Programmable Gate Arrays hardware, where a 132x speedup over CPU is achieved during online prediction. Using intraday tick data from the E-mini S&P 500 options market, we show that the Gaussian kernel outperforms the linear kernel in regulating the size of support vectors, and that our empirical IVS algorithm beats two competing online methods with regards to model complexity and regression errors (the mean absolute percentage error of our algorithm is up to 13%). Best results are obtained at the center of the IVS grid due to its larger number of adjacent support vectors than the edges of the grid. Sensitivity analysis is also presented to demonstrate how hyper parameters affect the error rates and model complexity.}
 }
 
 
-@article{grinold2000,
-  title={Active portfolio management},
-  author={Grinold, Richard C and Kahn, Ronald N},
-  year={2000},
-  publisher={McGraw Hill New York, NY}
+
+@article{GUNNARSSON2024103221,
+title = {Prediction of realized volatility and implied volatility indices using AI and machine learning: A review},
+journal = {International Review of Financial Analysis},
+volume = {93},
+pages = {103221},
+year = {2024},
+issn = {1057-5219},
+doi = {https://doi.org/10.1016/j.irfa.2024.103221},
+url = {https://www.sciencedirect.com/science/article/pii/S1057521924001534},
+author = {Elias Søvik Gunnarsson and Håkon Ramon Isern and Aristidis Kaloudis and Morten Risstad and Benjamin Vigdel and Sjur Westgaard},
+keywords = {Volatility forecasting, Machine learning, Explainable artificial intelligence},
+abstract = {In this systematic literature review, we examine the existing studies predicting realized volatility and implied volatility indices using artificial intelligence and machine learning. We survey the literature in order to discover whether the proposed methods provide superior forecasts compared to traditional econometric models, how widespread the application of explainable AI is, and to outline potential areas for further research. Generally, we find the efficacy of AI and ML methods for volatility prediction to be highly promising, often providing comparative or better results than their econometric counterparts. Neural networks employing memory, such as Long–Short Term Memory and Gated Recurrent Units, consistently rank among the top performing models. However, traditional econometric models are still highly relevant, commonly yielding similar results as more advanced ML and AI models. In light of the success with ensemble methods, a promising area of research is the use of hybrid models, combining machine learning and econometric models. In spite of the common critique of many machine learning models being of a black-box nature, we find that very few papers apply XAI to analyze and support their empirical results. Thus, we recommend that researchers strive harder to employ XAI in future work. Similarly, we see potential for applications of probabilistic machine learning, effectively quantifying uncertainty in volatility forecasts from machine learning models.}
 }
 
 
-  @Manual{Texevier,
-    title = {{Texevier}: {P}ackage to create Elsevier templates for Rmarkdown},
-    author = {N.F. Katzke},
-    organization = {Bureau for Economic Research},
-    address = {Stellenbosch, South Africa},
-    note = {version 0.1.2},
-    year = {2017},
-  }
+
+@Article{Horvath2021DeepVol,
+  author={Blanka Horvath and Aitor Muguruza and Mehdi Tomas},
+  title={{Deep learning volatility: a deep neural network perspective on pricing and calibration in (rough) volatility models}},
+  journal={Quantitative Finance},
+  year=2021,
+  volume={21},
+  number={1},
+  pages={11-27},
+  month={January},
+  keywords={},
+  doi={10.1080/14697688.2020.1817974},
+  abstract={ We present a neural network-based calibration method that performs the calibration task within a few milliseconds for the full implied volatility surface. The framework is consistently applicable throughout a range of volatility models—including second-generation stochastic volatility models and the rough volatility family—and a range of derivative contracts. Neural networks in this work are used in an off-line approximation of complex pricing functions, which are difficult to represent or time-consuming to evaluate by other means. The form in which information from available data is extracted and used influences network performance: The grid-based algorithm used for calibration is inspired by representing the implied volatility and option prices as a collection of pixels. We highlight how this perspective opens new horizons for quantitative modelling. The calibration bottleneck posed by a slow pricing of derivative contracts is lifted, and stochastic volatility models (classical and rough) can be handled in great generality as the framework also allows taking the forward variance curve as an input. We demonstrate the calibration performance both on simulated and historical data, on different derivative contracts and on a number of example models of increasing complexity, and also showcase some of the potentials of this approach towards model recognition. The algorithm and examples are provided in the Github repository GitHub: NN-StochVol-Calibrations.},
+  url={https://ideas.repec.org/a/taf/quantf/v21y2021i1p11-27.html}
+}
+
+
+
+@TechReport{Wu2025CrossAssetVol,
+  author    = {Emma Wu and Ladislav Jankovic and Bram Kaplan and Tony SK Lee},
+  title     = {Cross Asset Volatility: Machine Learning Based Trade Recommendations},
+  institution = {J.P. Morgan Global Markets Strategy},
+  year      = {2025},
+  month     = {March},
+  day       = {11},
+  type      = {Research Report},
+  url       = {https://www.jpmorganmarkets.com},
+  note      = {J.P. Morgan Securities LLC},
+}
+
+
+
+@TechReport{Wu2024InvestableAI,
+  author    = {Emma Wu and Peng Cheng and Ladislav Jankovic and Marko Kolanovic},
+  title     = {Investable AI for Volatility Trading Deep Learning Model for Cross Asset Volatility Strategies},
+  institution = {J.P. Morgan Global Quantitative & Derivatives Strategy},
+  year      = {2024},
+  month     = {January},
+  day       = {11},
+  type      = {Research Report},
+  url       = {httpswww.jpmorganmarkets.com},
+  note      = {J.P. Morgan Securities LLC},
+}
+
+
+
+@article{Zhang2023VolForecastML,
+  author    = {Chao Zhang and Yihuang Zhang and Mihai Cucuringu and Zhongmin Qian},
+  title     = {Volatility Forecasting with Machine Learning and Intraday Commonality},
+  journal   = {Journal of Financial Econometrics},
+  year      = {2023},
+  volume    = {22},
+  number    = {2},
+  pages     = {492--530},
+  doi       = {10.1093/jjfinec/nbad005},
+  issn      = {1479-8409},
+  url       = {https://doi.org/10.1093/jjfinec/nbad005},
+  abstract  = {We apply machine learning models to forecast intraday realized volatility (RV), by exploiting commonality in intraday volatility via pooling stock data together, and by incorporating a proxy for the market volatility. Neural networks dominate linear regressions and tree-based models in terms of performance, due to their ability to uncover and model complex latent interactions among variables. Our findings remain robust when we apply trained models to new stocks that have not been included in the training set, thus providing new empirical evidence for a universal volatility mechanism among stocks. Finally, we propose a new approach to forecasting 1-day-ahead RVs using past intraday RVs as predictors, and highlight interesting time-of-day effects that aid the forecasting mechanism. The results demonstrate that the proposed methodology yields superior out-of-sample forecasts over a strong set of traditional baselines that only rely on past daily RVs.}
+}
+
+
+
+
+@article{Petrozziello2022DeepVol,
+  author    = {Alessio Petrozziello and Luigi Troiano and Angela Serra and Ivan Jordanov and Giuseppe Storti and Roberto Tagliaferri and Michele La Rocca},
+  title     = {Deep learning for volatility forecasting in asset management},
+  journal   = {Soft Computing},
+  year      = {2022},
+  volume    = {26},
+  number    = {17},
+  pages     = {8553--8574},
+  month     = sep,
+  publisher = {Springer-Verlag},
+  address   = {Berlin, Heidelberg},
+  issn      = {1432-7643},
+  doi       = {10.1007/s00500-022-07161-1},
+  url       = {https://doi.org/10.1007/s00500-022-07161-1},
+  keywords  = {Deep learning, LSTM, Time series, Forecasting, Volatility},
+  abstract  = {Predicting volatility is a critical activity for taking risk-adjusted decisions in asset trading and allocation. In order to provide effective decision-making support, in this paper we investigate the profitability of a deep Long Short-Term Memory (LSTM) Neural Network for forecasting daily stock market volatility using a panel of 28 assets representative of the Dow Jones Industrial Average index combined with the market factor proxied by the SPY and, separately, a panel of 92 assets belonging to the NASDAQ 100 index. The Dow Jones plus SPY data are from January 2002 to August 2008, while the NASDAQ 100 is from December 2012 to November 2017. If, on the one hand, we expect that this evolutionary behavior can be effectively captured adaptively through the use of Artificial Intelligence (AI) flexible methods, on the other, in this setting, standard parametric approaches could fail to provide optimal predictions. We compared the volatility forecasts generated by the LSTM approach to those obtained through use of widely recognized benchmarks models in this field, in particular, univariate parametric models such as the Realized Generalized Autoregressive Conditionally Heteroskedastic (R-GARCH) and the Glosten–Jagannathan–Runkle Multiplicative Error Models (GJR-MEM). The results demonstrate the superiority of the LSTM over the widely popular R-GARCH and GJR-MEM univariate parametric methods, when forecasting in condition of high volatility, while still producing comparable predictions for more tranquil periods.}
+}
+
+
