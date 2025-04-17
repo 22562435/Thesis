@@ -199,7 +199,8 @@
 
 \begin{frontmatter}  %
 
-\title{Thesis Proposal: Machine Learning and Volatility Models}
+\title{Thesis Proposal: Forecasting JSE Equity Volatility (ML
+vs.~GARCH/HAR Models)}
 
 % Set to FALSE if wanting to remove title (for submission)
 
@@ -216,6 +217,15 @@
 \address[Add1]{Stellenbosch University, South Africa}
 
 
+\begin{abstract}
+\small{
+Compare the performance of Machine Learning (ML) models (e.g., LSTM,
+XGBoost) and traditional econometric models (GARCH, HAR) in forecasting
+equity volatility on the Johannesburg Stock Exchange (JSE),
+contextualized to South Africa's unique market dynamics (e.g., commodity
+dependence, political risk).
+}
+\end{abstract}
 
 \vspace{1cm}
 
@@ -258,9 +268,35 @@
 Here are the papers I intend to read and give a brief summary of them:
 
 Gunnarsson, Isern, Kaloudis, Risstad, Vigdel \& Westgaard
-(\citeproc{ref-GUNNARSSON2024103221}{2024: 33}) Horvath, Muguruza \&
-Tomas (\citeproc{ref-Horvath2021DeepVol}{2021}) Petrozziello, Troiano,
-Serra, Jordanov, Storti, Tagliaferri \& Rocca
+(\citeproc{ref-GUNNARSSON2024103221}{2024})
+
+Notes that ML and AI methods rank high and on par with econometric
+predicitons of realised volatility. Using explainable AI or creating
+explainable AI might be interesting in the context of my paper.
+
+This paper looks at realised volatility which is inferreed from the sum
+of square intradaily hihg-frequency returns.
+
+\begin{quote}
+We find that, going forward, the use of XAI and implied volatility
+forecasting forecasting proves an interesting direction for further
+research, as well as combination of the promsing performing models and
+Bayesian approaches to quanitify the uncertainty introduced by models to
+explain trustworthiness of predictions.
+\end{quote}
+
+The top three testing messures found in Gunnarsson \emph{et al.}
+(\citeproc{ref-GUNNARSSON2024103221}{2024}) to compare models and
+forecasting was - Diebold-Mariano - Clark-West - Model Confidence Set
+
+On a slight tangent, this paper references another paper by Bouri et
+al.~(2020) who used google search volume intensity associated with the
+US-China trade war to capture uncertainty aspects. In terms of data
+input, if we could get access to this, would be extremely valuable to
+add some google data to my research.
+
+Horvath, Muguruza \& Tomas (\citeproc{ref-Horvath2021DeepVol}{2021})
+Petrozziello, Troiano, Serra, Jordanov, Storti, Tagliaferri \& Rocca
 (\citeproc{ref-Petrozziello2022DeepVol}{2022}) Wu, Cheng, Jankovic \&
 Kolanovic (\citeproc{ref-Wu2024InvestableAI}{2024}) Wu, Jankovic, Kaplan
 \& Lee (\citeproc{ref-Wu2025CrossAssetVol}{2025}) Zeng \& Klabjan
@@ -269,214 +305,214 @@ Kolanovic (\citeproc{ref-Wu2024InvestableAI}{2024}) Wu, Jankovic, Kaplan
 
 Zhang \emph{et al.} (\citeproc{ref-Zhang2023VolForecastML}{2023})
 
-\section*{Data}\label{data}
-\addcontentsline{toc}{section}{Data}
+Compare the performance of \textbf{Machine Learning (ML)} models (e.g.,
+LSTM, XGBoost) and \textbf{traditional econometric models} (GARCH, HAR)
+in forecasting equity volatility on the Johannesburg Stock Exchange
+(JSE), contextualized to South Africa's unique market dynamics (e.g.,
+commodity dependence, political risk).
 
-To write a comprehensive, focused quantitative econometric paper on
-machine learning and volatility models with less emphasis on an
-extensive literature review, you should prioritize a \textbf{clearly
-defined and narrow research question} and a \textbf{rigorous
-quantitative analysis} directly addressing that question. Here's how you
-can structure your paper, drawing on the provided sources:
+\section{Key Steps}\label{key-steps}
 
-\textbf{I. Introduction and Focused Research Question:}
+\subsection{Data Collection \&
+Preparation}\label{data-collection-preparation}
 
 \begin{itemize}
 \tightlist
 \item
-  Start with a concise introduction that immediately highlights the
-  specific gap you are addressing in the literature or a particular
-  problem you are investigating.
-\item
-  \textbf{Clearly state your focused research question(s)}. For
-  instance, instead of broadly investigating if ML can forecast
-  volatility better than traditional models, you might focus on:
+  \textbf{Data Sources}:
 
   \begin{itemize}
   \tightlist
   \item
-    The performance of a specific novel ML architecture (e.g., an
-    attention-based deep learning model) in forecasting the implied
-    volatility of a particular asset class (e.g., S\&P 500 options)
-    compared to a specific benchmark (e.g., a specific GARCH extension
-    or HAR model).
+    \textbf{JSE Equity Data}: Daily/index returns (e.g., JSE Top 40)
+    from Bloomberg, Yahoo Finance, or \texttt{Quantmod} in R.\\
   \item
-    The impact of a specific type of high-frequency intraday data (e.g.,
-    order book data, transaction volume) as features in an ML model for
-    short-term realized volatility forecasting for a specific set of
-    stocks.
+    \textbf{Volatility Proxy}: Realized volatility (using intraday data)
+    or daily squared returns.\\
   \item
-    The effectiveness of a particular XAI technique (e.g., SHAP values)
-    in interpreting the predictions of a specific ML model applied to
-    implied volatility surface modeling.
-  \item
-    The economic value (e.g., through backtesting trading strategies) of
-    volatility forecasts from a specific ML model compared to a standard
-    econometric model for a defined set of assets.
+    \textbf{Exogenous Variables}:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Commodity prices (platinum, gold) via \texttt{Quandl}.\\
+    \item
+      SA-specific risks (Eskom load-shedding schedules, political risk
+      indices).\\
+    \item
+      Global factors (USD/ZAR exchange rate, Fed rates).
+    \end{itemize}
   \end{itemize}
 \item
-  Briefly mention the contribution of your focused study to the existing
-  literature without an exhaustive review at this stage. You can refer
-  to recent reviews to justify the relevance of your specific angle.
-\item
-  Outline the structure of your paper.
-\end{itemize}
-
-\textbf{II. Data:}
-
-\begin{itemize}
-\tightlist
-\item
-  Provide a detailed description of the specific dataset(s) you will
-  use.
-\item
-  Clearly define your volatility measure (e.g., realized volatility
-  calculated from high-frequency returns, implied volatility from option
-  prices, or volatility indices like VIX).
-\item
-  Specify the asset class(es), time period, and sampling frequency. If
-  using high-frequency data, explain the cleaning and aggregation
-  methods.
-\item
-  Describe the predictor variables you will use, justifying their
-  selection based on previous findings (cite specific papers from the
-  existing literature concisely) or theoretical arguments. If using
-  exogenous data, clearly state its source and frequency.
-\end{itemize}
-
-\textbf{III. Methodology:}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Clearly and concisely present the econometric and machine
-  learning models} you will employ. Focus on the mathematical
-  specification of the models.
+  \textbf{Preprocessing}:
 
   \begin{itemize}
   \tightlist
   \item
-    For ML models, describe the architecture, activation functions,
-    optimization algorithm (e.g., Adam), and hyperparameter tuning
-    process (e.g., cross-validation).
+    Handle missing data, outliers, and structural breaks (e.g.,
+    COVID-19, 2021 riots).\\
   \item
-    For benchmark econometric models (e.g., GARCH, HAR), provide their
-    standard formulations.
+    Normalize/standardize features for ML models.
+  \end{itemize}
+\end{itemize}
+
+\subsection{Model Implementation}\label{model-implementation}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Traditional Models}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{GARCH}: Use \texttt{rugarch} in R to model volatility
+    clustering (e.g., EGARCH for asymmetry).\\
+  \item
+    \textbf{HAR-RV}: Implement Heterogeneous Autoregressive model with
+    \texttt{highfrequency} package.\\
   \end{itemize}
 \item
-  Explain your chosen training scheme (e.g., single asset, pooling data)
-  and out-of-sample testing procedure (e.g., rolling window).
-\item
-  If applicable, describe any feature engineering techniques or data
-  transformations you will use.
-\item
-  If your focus includes explainability, detail the XAI methods you will
-  apply.
-\item
-  If you are investigating computational aspects, describe the hardware
-  or software used (e.g., FPGA technology).
+  \textbf{ML Models}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{LSTM/GRU}: Sequence-based models using
+    \texttt{keras}/\texttt{tensorflow}.\\
+  \item
+    \textbf{Tree-Based}: XGBoost (\texttt{xgboost}), Random Forest
+    (\texttt{randomForest}).\\
+  \item
+    \textbf{Hybrids}: Combine HAR residuals with ML predictions.
+  \end{itemize}
 \end{itemize}
 
-\textbf{IV. Evaluation Metrics:}
+\subsection{Feature Engineering}\label{feature-engineering}
 
 \begin{itemize}
 \tightlist
 \item
-  Specify the \textbf{quantitative evaluation metrics} you will use to
-  compare the forecasting performance of your models. These could
-  include statistical measures like Mean Squared Error (MSE), Root Mean
-  Squared Error (RMSE), Mean Absolute Percentage Error (MAPE),
-  Quasi-Likelihood (QLIKE), and statistical tests for predictive
-  accuracy like the Diebold-Mariano (DM) test.
+  \textbf{Lag Features}: Historical volatility, returns, trading
+  volume.\\
 \item
-  If your research question involves economic significance, clearly
-  outline how you will evaluate the models from an economic point of
-  view (e.g., through backtesting trading strategies, Value-at-Risk
-  (VaR) analysis).
+  \textbf{SA-Specific Features}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Load-shedding stages (scraped via \texttt{rvest}).\\
+  \item
+    SA sovereign credit rating changes.\\
+  \item
+    Commodity price shocks (platinum/gold).
+  \end{itemize}
 \end{itemize}
 
-\textbf{V. Empirical Results and Discussion:}
+\subsection{Training \& Validation}\label{training-validation}
 
 \begin{itemize}
 \tightlist
 \item
-  Present your quantitative results in a clear and organized manner
-  using tables and figures.
+  \textbf{Train-Test Split}: Time-series cross-validation (e.g., rolling
+  window).\\
 \item
-  \textbf{Focus your discussion directly on answering your stated
-  research question(s)} based on the empirical evidence.
-\item
-  Compare the performance of your chosen ML model(s) against the
-  benchmark econometric model(s) using the selected evaluation metrics.
-\item
-  Analyze the statistical significance of any performance differences
-  (e.g., using DM tests).
-\item
-  Discuss the implications of your findings in the context of the
-  specific niche you are investigating. Briefly connect your results to
-  the broader literature, highlighting how your focused study
-  contributes or contrasts with existing findings. You can be more
-  selective in the literature you discuss here, focusing on the most
-  directly relevant studies.
-\item
-  If applicable, interpret the results of your XAI analysis, explaining
-  which features are most important for your ML model's predictions.
-\item
-  If you conducted an economic evaluation, discuss the practical
-  implications of your findings.
+  \textbf{Hyperparameter Tuning}: Grid search for ML models (e.g.,
+  \texttt{mlr3} in R).
 \end{itemize}
 
-\textbf{VI. Conclusion and Future Work:}
+\subsection{Evaluation}\label{evaluation}
 
 \begin{itemize}
 \tightlist
 \item
-  Summarize your main quantitative findings and directly address your
-  research question(s).
+  \textbf{Metrics}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Statistical: MSE, MAE, QLIKE.\\
+  \item
+    Economic: Value-at-Risk (VaR) backtesting, Sharpe ratio of
+    volatility-based strategies.\\
+  \end{itemize}
 \item
-  Briefly reiterate the contribution of your focused study.
-\item
-  Suggest specific avenues for future research that build directly on
-  your findings and the limitations of your study.
+  \textbf{Statistical Tests}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Diebold-Mariano test for forecast superiority.\\
+  \item
+    Model Confidence Set (MCS) to rank models.
+  \end{itemize}
 \end{itemize}
 
-\textbf{Strategies for Reducing Literature Review:}
+\subsection{Interpretation \& Context}\label{interpretation-context}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Target a Very Specific Gap:} Instead of reviewing the entire
-  landscape of ML in volatility, focus on a very narrow sub-topic where
-  the existing literature is limited or where a specific technique has
-  not been thoroughly explored (e.g., the application of a particular
-  deep learning architecture to a niche market). The literature review
-  can then be more concentrated on the immediate context of your
-  research question.
+  \textbf{XAI}: Use SHAP values (\texttt{DALEX}) to interpret ML drivers
+  (e.g., ``How much do platinum prices impact mining stock
+  forecasts?'').\\
 \item
-  \textbf{Build Upon a Recent Survey:} Since comprehensive literature
-  reviews exist, you can briefly summarize the state of the art based on
-  these reviews and then immediately narrow down to the specific issue
-  your paper addresses.
-\item
-  \textbf{Focus on Methodological Innovation or Application:} If your
-  paper introduces a novel ML technique or applies an existing one to a
-  new and underexplored area of volatility modeling, the literature
-  review can be more focused on the methodological background and the
-  specific context of your application, rather than a broad overview of
-  all volatility models or all ML techniques.
-\item
-  \textbf{Assume Familiarity with Standard Models:} For well-established
-  econometric models (like GARCH) and common ML algorithms (like basic
-  neural networks), you can often provide a brief description and cite
-  seminal works without an extensive historical review.
+  \textbf{Comparative Analysis}: Contrast results with global markets
+  (e.g., ``Why does XGBoost underperform in SA vs.~the S\&P 500?'').
 \end{itemize}
 
-By adopting a focused research question and prioritizing a rigorous
-quantitative analysis, you can write a comprehensive and valuable
-econometric paper on machine learning and volatility models with a less
-extensive literature review. The key is to be precise in your question,
-thorough in your methodology and evaluation, and direct in your
-discussion of the results in relation to your specific focus.
+\section{Deliverables}\label{deliverables}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Visualizations}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Time-series plots of volatility with crisis annotations.\\
+  \item
+    SHAP summary plots for feature importance.\\
+  \item
+    Heatmaps of cross-correlations between variables.\\
+  \end{itemize}
+\item
+  \textbf{Code}: Reproducible R scripts for data, models, and visuals.\\
+\item
+  \textbf{Policy Insights}: Practical recommendations for SA
+  investors/policymakers (e.g., hedging strategies during
+  load-shedding).
+\end{enumerate}
+
+\section{Challenges \& Solutions}\label{challenges-solutions}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Scarcity}: Use alternative data (news sentiment, Eskom
+  reports) to augment limited JSE history.\\
+\item
+  \textbf{Overfitting}: Regularization (L1/L2 for ML) and parsimony
+  checks for GARCH.\\
+\item
+  \textbf{Computational Cost}: Optimize code with \texttt{data.table} or
+  cloud computing (AWS/GCP).
+\end{itemize}
+
+\section{Why This Matters}\label{why-this-matters}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Emerging Markets Gap}: Most volatility studies focus on
+  developed markets; SA's unique risks (commodities, politics) offer
+  fresh insights.\\
+\item
+  \textbf{Practical Value}: Helps SA investors manage risk in a
+  turbulent market.
+\end{itemize}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{1}
