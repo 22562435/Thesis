@@ -199,8 +199,9 @@
 
 \begin{frontmatter}  %
 
-\title{Thesis Proposal: Forecasting JSE Equity Volatility (ML
-vs.~GARCH/HAR Models)}
+\title{Thesis Proposal - Improving Equity Volatility Forecasts for
+Emerging Markets: A Comparative Study of AI and Econometric Approaches
+Using South African Data}
 
 % Set to FALSE if wanting to remove title (for submission)
 
@@ -219,11 +220,9 @@ vs.~GARCH/HAR Models)}
 
 \begin{abstract}
 \small{
-Compare the performance of Machine Learning (ML) models (e.g., LSTM,
-XGBoost) and traditional econometric models (GARCH, HAR) in forecasting
-equity volatility on the Johannesburg Stock Exchange (JSE),
-contextualized to South Africa's unique market dynamics (e.g., commodity
-dependence, political risk).
+Testing whether modern AI methods can predict stock market swings in
+South Africa---driven by issues like power cuts and mining
+reliance---better than older models.
 }
 \end{abstract}
 
@@ -265,254 +264,342 @@ dependence, political risk).
 \section{\texorpdfstring{Introduction
 \label{Introduction}}{Introduction }}\label{introduction}
 
-Here are the papers I intend to read and give a brief summary of them:
+Predicting stock market volatility---how wildly prices swing---is
+crucial for investors and policymakers, especially in emerging markets
+like South Africa. The Johannesburg Stock Exchange (JSE) faces unique
+challenges: its economy relies heavily on gold and platinum exports,
+suffers frequent power blackouts (like Eskom's load-shedding), and
+grapples with political uncertainty. Traditional forecasting models,
+such as GARCH or HAR, are designed for stable markets and often miss
+these local, real-world risks. This raises a critical question:
+\emph{Can machine learning (ML) models like LSTM and XGBoost predict JSE
+volatility more accurately by incorporating these South African-specific
+factors?}
 
-Gunnarsson, Isern, Kaloudis, Risstad, Vigdel \& Westgaard
-(\citeproc{ref-GUNNARSSON2024103221}{2024})
+To answer this, the study will analyze JSE data (e.g., Top 40 index) and
+test whether ML models outperform traditional methods when local drivers
+are included. The process starts with preparing high-frequency trading
+data, calculating volatility, and integrating SA-specific variables like
+commodity prices and load-shedding schedules. Models will be trained
+using time-series techniques to avoid overfitting, including hybrid
+approaches that combine traditional methods (e.g., HAR) with ML (e.g.,
+LSTM) to balance structure and flexibility.
 
-Notes that ML and AI methods rank high and on par with econometric
-predicitons of realised volatility. Using explainable AI or creating
-explainable AI might be interesting in the context of my paper.
+Accuracy will be tested using standard metrics like mean squared error
+(MSE) and real-world scenarios, such as predicting losses during power
+blackouts or political crises. A key focus is transparency: tools like
+SHAP values will explain why models make predictions---for example,
+revealing whether load-shedding matters more than gold prices during
+crises.
 
-This paper looks at realised volatility which is inferreed from the sum
-of square intradaily hihg-frequency returns.
+Results could help South African investors hedge risks more effectively
+and guide policymakers in stabilizing markets during infrastructure or
+political shocks. By focusing on SA's unique challenges, this study aims
+to show whether modern ML tools can outperform traditional models in
+messy, real-world emerging markets---where global theories often fall
+short.
 
 \begin{quote}
-We find that, going forward, the use of XAI and implied volatility
-forecasting forecasting proves an interesting direction for further
-research, as well as combination of the promsing performing models and
-Bayesian approaches to quanitify the uncertainty introduced by models to
-explain trustworthiness of predictions.
+What follows is the thesis outline, followed by Research Design \& Data
+Collection, then Model Selection \& Training, then Evaluation Framework,
+and finally Hopeful Contributions
 \end{quote}
 
-The top three testing messures found in Gunnarsson \emph{et al.}
-(\citeproc{ref-GUNNARSSON2024103221}{2024}) to compare models and
-forecasting was - Diebold-Mariano - Clark-West - Model Confidence Set
-
-On a slight tangent, this paper references another paper by Bouri et
-al.~(2020) who used google search volume intensity associated with the
-US-China trade war to capture uncertainty aspects. In terms of data
-input, if we could get access to this, would be extremely valuable to
-add some google data to my research.
-
-Horvath, Muguruza \& Tomas (\citeproc{ref-Horvath2021DeepVol}{2021})
-Petrozziello, Troiano, Serra, Jordanov, Storti, Tagliaferri \& Rocca
-(\citeproc{ref-Petrozziello2022DeepVol}{2022}) Wu, Cheng, Jankovic \&
-Kolanovic (\citeproc{ref-Wu2024InvestableAI}{2024}) Wu, Jankovic, Kaplan
-\& Lee (\citeproc{ref-Wu2025CrossAssetVol}{2025}) Zeng \& Klabjan
-(\citeproc{ref-ZENG2019376}{2019}) Zhang, Zhang, Cucuringu \& Qian
-(\citeproc{ref-Zhang2023VolForecastML}{2023})
-
-Zhang \emph{et al.} (\citeproc{ref-Zhang2023VolForecastML}{2023})
-
-Compare the performance of \textbf{Machine Learning (ML)} models (e.g.,
-LSTM, XGBoost) and \textbf{traditional econometric models} (GARCH, HAR)
-in forecasting equity volatility on the Johannesburg Stock Exchange
-(JSE), contextualized to South Africa's unique market dynamics (e.g.,
-commodity dependence, political risk).
-
-\section{Key Steps}\label{key-steps}
-
-\subsection{Data Collection \&
-Preparation}\label{data-collection-preparation}
+\section{Thesis Structure:}\label{thesis-structure}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Data Sources}:
+  Introduction
 
   \begin{itemize}
   \tightlist
   \item
-    \textbf{JSE Equity Data}: Daily/index returns (e.g., JSE Top 40)
-    from Bloomberg, Yahoo Finance, or \texttt{Quantmod} in R.\\
-  \item
-    \textbf{Volatility Proxy}: Realized volatility (using intraday data)
-    or daily squared returns.\\
-  \item
-    \textbf{Exogenous Variables}:
-
-    \begin{itemize}
-    \tightlist
-    \item
-      Commodity prices (platinum, gold) via \texttt{Quandl}.\\
-    \item
-      SA-specific risks (Eskom load-shedding schedules, political risk
-      indices).\\
-    \item
-      Global factors (USD/ZAR exchange rate, Fed rates).
-    \end{itemize}
+    SA's volatility challenges; ML vs.~traditional debate
+    (\citeproc{ref-GUNNARSSON2024103221}{Gunnarsson, Isern, Kaloudis,
+    Risstad, Vigdel \& Westgaard, 2024};
+    \citeproc{ref-Wu2024InvestableAI}{Wu, Cheng, Jankovic \& Kolanovic,
+    2024})
   \end{itemize}
 \item
-  \textbf{Preprocessing}:
+  Literature Review
 
   \begin{itemize}
   \tightlist
   \item
-    Handle missing data, outliers, and structural breaks (e.g.,
-    COVID-19, 2021 riots).\\
+    ML in volatility forecasting
+    (\citeproc{ref-GUNNARSSON2024103221}{Gunnarsson \emph{et al.},
+    2024}; \citeproc{ref-Horvath2021DeepVol}{Horvath, Muguruza \& Tomas,
+    2021}), emerging market gaps
+    (\citeproc{ref-Zhang2023VolForecastML}{Zhang, Zhang, Cucuringu \&
+    Qian, 2023}).
+  \end{itemize}
+\item
+  Methodology
+
+  \begin{itemize}
+  \tightlist
   \item
-    Normalize/standardize features for ML models.
+    Data preprocessing
+    (\citeproc{ref-Petrozziello2022DeepVol}{Petrozziello, Troiano,
+    Serra, Jordanov, Storti, Tagliaferri \& Rocca, 2022};
+    \citeproc{ref-Zhang2023VolForecastML}{Zhang \emph{et al.}, 2023})
+  \item
+    Model design (\citeproc{ref-GUNNARSSON2024103221}{Gunnarsson
+    \emph{et al.}, 2024}; \citeproc{ref-Horvath2021DeepVol}{Horvath
+    \emph{et al.}, 2021}; \citeproc{ref-Wu2024InvestableAI}{Wu \emph{et
+    al.}, 2024})\\
+  \item
+    Adaptive learning (\citeproc{ref-ZENG2019376}{Zeng \& Klabjan,
+    2019}).
+  \end{itemize}
+\item
+  Results
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Statistical/economic metrics\\
+  \item
+    SHAP interpretation (\citeproc{ref-GUNNARSSON2024103221}{Gunnarsson
+    \emph{et al.}, 2024}; \citeproc{ref-Wu2025CrossAssetVol}{Wu,
+    Jankovic, Kaplan \& Lee, 2025})
+  \end{itemize}
+\item
+  Discussion
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ML flexibility in SA's context vs.~developed markets
+    (\citeproc{ref-GUNNARSSON2024103221}{Gunnarsson \emph{et al.},
+    2024}; \citeproc{ref-Zhang2023VolForecastML}{Zhang \emph{et al.},
+    2023}).\\
+  \item
+    Policy/investor implications (\citeproc{ref-Wu2025CrossAssetVol}{Wu
+    \emph{et al.}, 2025}; \citeproc{ref-ZENG2019376}{Zeng \& Klabjan,
+    2019}).
+  \end{itemize}
+\item
+  Conclusion
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Synthesis of findings; future work (e.g., rough volatility with JSE
+    options data).
   \end{itemize}
 \end{itemize}
 
-\subsection{Model Implementation}\label{model-implementation}
+\section{Research Design \& Data
+Collection}\label{research-design-data-collection}
+
+\textbf{Data sources}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Traditional Models}:
+  Core Data: JSE Top 40 high-frequency returns (15-minute intervals,
+  adjusted for liquidity constraints per Gunnarsson \emph{et al.}
+  (\citeproc{ref-GUNNARSSON2024103221}{2024}) and Petrozziello \emph{et
+  al.} (\citeproc{ref-Petrozziello2022DeepVol}{2022}).\\
+\item
+  Exogenous Variables:
 
   \begin{itemize}
   \tightlist
   \item
-    \textbf{GARCH}: Use \texttt{rugarch} in R to model volatility
-    clustering (e.g., EGARCH for asymmetry).\\
+    Commodity prices (platinum, gold) -- Gunnarsson \emph{et al.}
+    (\citeproc{ref-GUNNARSSON2024103221}{2024}), Wu \emph{et al.}
+    (\citeproc{ref-Wu2024InvestableAI}{2024}).\\
   \item
-    \textbf{HAR-RV}: Implement Heterogeneous Autoregressive model with
-    \texttt{highfrequency} package.\\
+    Eskom load-shedding schedules (categorical/time-series) --
+    (\citeproc{ref-Petrozziello2022DeepVol}{Petrozziello \emph{et al.},
+    2022}; \citeproc{ref-Zhang2023VolForecastML}{Zhang \emph{et al.},
+    2023}).\\
+  \item
+    SA political risk index (text-based scores) -- Gunnarsson \emph{et
+    al.} (\citeproc{ref-GUNNARSSON2024103221}{2024}).
+    \emph{(Realistically this may be hard to do but I can attempt)}\\
   \end{itemize}
 \item
-  \textbf{ML Models}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \textbf{LSTM/GRU}: Sequence-based models using
-    \texttt{keras}/\texttt{tensorflow}.\\
-  \item
-    \textbf{Tree-Based}: XGBoost (\texttt{xgboost}), Random Forest
-    (\texttt{randomForest}).\\
-  \item
-    \textbf{Hybrids}: Combine HAR residuals with ML predictions.
-  \end{itemize}
+  Benchmarks: Realized Volatility (RV) using subsampled kernels
+  (\citeproc{ref-Petrozziello2022DeepVol}{Petrozziello \emph{et al.},
+  2022}; \citeproc{ref-Zhang2023VolForecastML}{Zhang \emph{et al.},
+  2023}) to mitigate microstructure noise.
 \end{itemize}
 
-\subsection{Feature Engineering}\label{feature-engineering}
+\textbf{Preprocessing:}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Lag Features}: Historical volatility, returns, trading
-  volume.\\
+  RV Calculation: Use 15-minute intervals (not 5-minute, aligning with
+  Gunnarsson \emph{et al.} (\citeproc{ref-GUNNARSSON2024103221}{2024})
+  liquidity caveat).\\
 \item
-  \textbf{SA-Specific Features}:
+  Feature Engineering:
 
   \begin{itemize}
   \tightlist
   \item
-    Load-shedding stages (scraped via \texttt{rvest}).\\
+    Lagged RV components (HAR-RV structure) -- Gunnarsson \emph{et al.}
+    (\citeproc{ref-GUNNARSSON2024103221}{2024}), Petrozziello \emph{et
+    al.} (\citeproc{ref-Petrozziello2022DeepVol}{2022})
   \item
-    SA sovereign credit rating changes.\\
+    Grid Representation: Convert RV and exogenous variables into
+    time-strike matrices (\citeproc{ref-Horvath2021DeepVol}{Horvath
+    \emph{et al.}, 2021}) but limit grid complexity to 3 channels (RV,
+    commodities, load-shedding) to avoid overfitting.\\
   \item
-    Commodity price shocks (platinum/gold).
+    Diurnal adjustment and winsorization (Zhang \emph{et al.}
+    (\citeproc{ref-Zhang2023VolForecastML}{2023})) for intraday returns.
   \end{itemize}
 \end{itemize}
 
-\subsection{Training \& Validation}\label{training-validation}
+\section{Model Selection \& Training}\label{model-selection-training}
 
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Train-Test Split}: Time-series cross-validation (e.g., rolling
-  window).\\
-\item
-  \textbf{Hyperparameter Tuning}: Grid search for ML models (e.g.,
-  \texttt{mlr3} in R).
-\end{itemize}
-
-\subsection{Evaluation}\label{evaluation}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Metrics}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Statistical: MSE, MAE, QLIKE.\\
-  \item
-    Economic: Value-at-Risk (VaR) backtesting, Sharpe ratio of
-    volatility-based strategies.\\
-  \end{itemize}
-\item
-  \textbf{Statistical Tests}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Diebold-Mariano test for forecast superiority.\\
-  \item
-    Model Confidence Set (MCS) to rank models.
-  \end{itemize}
-\end{itemize}
-
-\subsection{Interpretation \& Context}\label{interpretation-context}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{XAI}: Use SHAP values (\texttt{DALEX}) to interpret ML drivers
-  (e.g., ``How much do platinum prices impact mining stock
-  forecasts?'').\\
-\item
-  \textbf{Comparative Analysis}: Contrast results with global markets
-  (e.g., ``Why does XGBoost underperform in SA vs.~the S\&P 500?'').
-\end{itemize}
-
-\section{Deliverables}\label{deliverables}
+\textbf{Models}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Visualizations}:
+  Traditional:
 
   \begin{itemize}
   \tightlist
   \item
-    Time-series plots of volatility with crisis annotations.\\
-  \item
-    SHAP summary plots for feature importance.\\
-  \item
-    Heatmaps of cross-correlations between variables.\\
+    GARCH(1,1), HAR-RV ( Gunnarsson \emph{et al.}
+    (\citeproc{ref-GUNNARSSON2024103221}{2024}), Petrozziello \emph{et
+    al.} (\citeproc{ref-Petrozziello2022DeepVol}{2022})).\\
   \end{itemize}
 \item
-  \textbf{Code}: Reproducible R scripts for data, models, and visuals.\\
+  Machine Learning:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LSTM: Stacked architecture with dropout (Petrozziello \emph{et al.}
+    (\citeproc{ref-Petrozziello2022DeepVol}{2022})), attention
+    mechanisms for SA factors (Wu \emph{et al.}
+    (\citeproc{ref-Wu2024InvestableAI}{2024}); Wu \emph{et al.}
+    (\citeproc{ref-Wu2025CrossAssetVol}{2025})).\\
+  \item
+    XGBoost: Feature importance analysis via SHAP ( Gunnarsson \emph{et
+    al.} (\citeproc{ref-GUNNARSSON2024103221}{2024})).\\
+  \end{itemize}
 \item
-  \textbf{Policy Insights}: Practical recommendations for SA
-  investors/policymakers (e.g., hedging strategies during
-  load-shedding).
+  Hybrid: HAR-LSTM (HAR-RV inputs + LSTM layers) ( Gunnarsson \emph{et
+  al.} (\citeproc{ref-GUNNARSSON2024103221}{2024}), Horvath \emph{et
+  al.} (\citeproc{ref-Horvath2021DeepVol}{2021})).\\
+\item
+  Adaptive Online Learning: Incremental LSTM/XGBoost updates (Zeng \&
+  Klabjan (\citeproc{ref-ZENG2019376}{2019})) for crisis responsiveness.
 \end{enumerate}
 
-\section{Challenges \& Solutions}\label{challenges-solutions}
+\textbf{Training Protocol}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Data Scarcity}: Use alternative data (news sentiment, Eskom
-  reports) to augment limited JSE history.\\
+  Time-Series CV: Rolling window validation (70\% train, 30\% test)
+  (Petrozziello \emph{et al.}
+  (\citeproc{ref-Petrozziello2022DeepVol}{2022}), Gunnarsson \emph{et
+  al.} (\citeproc{ref-GUNNARSSON2024103221}{2024})).\\
 \item
-  \textbf{Overfitting}: Regularization (L1/L2 for ML) and parsimony
-  checks for GARCH.\\
+  Dynamic Feature Management: Retain top 10 features via SHAP-driven FVS
+  (Zeng \& Klabjan (\citeproc{ref-ZENG2019376}{2019})).\\
 \item
-  \textbf{Computational Cost}: Optimize code with \texttt{data.table} or
-  cloud computing (AWS/GCP).
+  Hardware: GPU acceleration for LSTM (Horvath \emph{et al.}
+  (\citeproc{ref-Horvath2021DeepVol}{2021})) but avoid FPGA (\emph{due
+  to feasibility concerns}).
 \end{itemize}
 
-\section{Why This Matters}\label{why-this-matters}
+\section{Evaluation Framework}\label{evaluation-framework}
+
+\textbf{Metrics:}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Emerging Markets Gap}: Most volatility studies focus on
-  developed markets; SA's unique risks (commodities, politics) offer
-  fresh insights.\\
+  Statistical: MSE, QLIKE (Gunnarsson \emph{et al.}
+  (\citeproc{ref-GUNNARSSON2024103221}{2024}), Petrozziello \emph{et
+  al.} (\citeproc{ref-Petrozziello2022DeepVol}{2022}), Zhang \emph{et
+  al.} (\citeproc{ref-Zhang2023VolForecastML}{2023})).\\
 \item
-  \textbf{Practical Value}: Helps SA investors manage risk in a
-  turbulent market.
+  Economic: VaR, Expected Shortfall (Gunnarsson \emph{et al.}
+  (\citeproc{ref-GUNNARSSON2024103221}{2024})), Sharpe/Sortino ratios
+  (Wu \emph{et al.} (\citeproc{ref-Wu2024InvestableAI}{2024}); Wu
+  \emph{et al.} (\citeproc{ref-Wu2025CrossAssetVol}{2025})).\\
+\item
+  Robustness:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Diebold-Mariano tests (Petrozziello \emph{et al.}
+    (\citeproc{ref-Petrozziello2022DeepVol}{2022})).\\
+  \item
+    Regime-specific analysis (load-shedding stages, political crises) (
+    Zhang \emph{et al.} (\citeproc{ref-Zhang2023VolForecastML}{2023}),
+    Wu \emph{et al.} (\citeproc{ref-Wu2024InvestableAI}{2024})).
+  \end{itemize}
 \end{itemize}
+
+\textbf{Interpretability:}
+
+\begin{itemize}
+\tightlist
+\item
+  SHAP Values: Track evolving importance of SA factors (e.g.,
+  load-shedding's impact during crises) (Gunnarsson \emph{et al.}
+  (\citeproc{ref-GUNNARSSON2024103221}{2024}), Zeng \& Klabjan
+  (\citeproc{ref-ZENG2019376}{2019})).\\
+\item
+  Crisis-Tagged Plots: Overlay volatility forecasts with
+  load-shedding/political events (Gunnarsson \emph{et al.}
+  (\citeproc{ref-GUNNARSSON2024103221}{2024}), Zhang \emph{et al.}
+  (\citeproc{ref-Zhang2023VolForecastML}{2023})).
+\end{itemize}
+
+\section{Hopeful Contributions}\label{hopeful-contributions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Emerging Market Insights:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Demonstrate ML's superiority in capturing SA-specific drivers
+    (commodities, load-shedding) vs.~GARCH/HAR.\\
+  \end{itemize}
+\item
+  Practical Tools:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Crisis-response dashboards with SHAP-driven volatility forecasts for
+    policymakers.\\
+  \end{itemize}
+\item
+  Methodological Advancements:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Hybrid HAR-LSTM model optimized for thin liquidity.
+  \end{itemize}
+\end{enumerate}
+
+\newpage
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{1}
